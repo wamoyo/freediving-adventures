@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreedivingAdventures.com - Coming Soon</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="success-message" class="success-message">
+      <div class="success-content">
+        <h2>Welcome to the Adventure!</h2>
+        <p>Thanks for joining the waitlist. You're all set to receive <strong>10% off all trips</strong> when we launch!</p>
+        <p class="success-email"></p>
+        <button id="close-success" class="close-button">Close</button>
+      </div>
+    </div>
+
+    <div id="error-message" class="error-message">
+      <div class="error-content">
+        <h2>Oops!</h2>
+        <p class="error-text"></p>
+        <button id="close-error" class="close-button">Close</button>
+      </div>
+    </div>
+
+    <main class="content">
+      <h1 class="headline">FreedivingAdventures.com</h1>
+      <!-- <p class="subheadline">Sitting in an office dreaming of Epic Freediving Adventures?</p> -->
+      <p class="subheadline">At your desk dreaming of diving?</p>
+
+      <form id="waitlist-form" class="waitlist-form">
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          class="email-input"
+        >
+
+        <!-- Honeypot field - hidden from users, catches bots -->
+        <input
+          type="text"
+          name="mobile"
+          id="mobile"
+          class="honeypot"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        >
+
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="certified_diver" value="true">
+            <span>I am a Certified Freediver</span>
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" name="certified_instructor" value="true">
+            <span>I'm an Instructor (we're hiring)</span>
+          </label>
+        </div>
+
+        <button type="submit" class="cta-button">Get Early Access + 10% Off All Trips</button>
+      </form>
+    </main>
+
+    <footer class="footer">
+      <p>Photo in Kona by <a href="https://www.instagram.com/andrewjamesferris" target="_blank" rel="noopener noreferrer">Andrew James Ferris</a></p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
