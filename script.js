@@ -84,6 +84,18 @@ function hideErrorMessage () {
   errorMessage.classList.remove('show')
 }
 
+// Side effect: Disable form inputs
+function disableForm (form) {
+  var inputs = form.querySelectorAll('input, button')
+  inputs.forEach(input => input.disabled = true)
+}
+
+// Side effect: Enable form inputs
+function enableForm (form) {
+  var inputs = form.querySelectorAll('input, button')
+  inputs.forEach(input => input.disabled = false)
+}
+
 // Side effect: Handle form submission
 function handleFormSubmit (event) {
   event.preventDefault()
@@ -97,16 +109,21 @@ function handleFormSubmit (event) {
     return
   }
 
+  // Disable form during submission
+  disableForm(form)
+
   // Submit to Lambda
   submitToLambda(data)
     .then(result => {
       console.log('Signup successful:', result)
       showSuccessMessage(data.email)
       form.reset()
+      enableForm(form)
     })
     .catch(error => {
       console.error('Signup error:', error)
       showErrorMessage(error.message || 'Something went wrong. Please try again.')
+      enableForm(form)
     })
 }
 
