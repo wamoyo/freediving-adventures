@@ -106,11 +106,7 @@ function handleFormSubmit (event) {
     })
     .catch(error => {
       console.error('Signup error:', error)
-      if (error.statusCode === 409) {
-        showErrorMessage('You\'re already on the waitlist!')
-      } else {
-        showErrorMessage(error.message || 'Something went wrong. Please try again.')
-      }
+      showErrorMessage(error.message || 'Something went wrong. Please try again.')
     })
 }
 
