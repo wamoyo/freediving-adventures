@@ -18,7 +18,7 @@ function isValidEmail (email) {
 
 // Side effect: Submit form data to Lambda
 async function submitToLambda (data) {
-  var lambdaUrl = 'https://7xko2ql3rwsl7dmo43k2jzf7ny0wksel.lambda-url.us-east-1.on.aws/'
+  var lambdaUrl = 'https://madf3svxcjbwndceiow7rzi7vm0kswra.lambda-url.us-east-1.on.aws/'
 
   try {
     var response = await fetch(lambdaUrl, {
