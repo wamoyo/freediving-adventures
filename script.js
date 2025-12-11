@@ -20,25 +20,38 @@ function isValidEmail (email) {
 async function submitToLambda (data) {
   var lambdaUrl = 'https://7xko2ql3rwsl7dmo43k2jzf7ny0wksel.lambda-url.us-east-1.on.aws/'
 
-  var response = await fetch(lambdaUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    credentials: 'include',
-    body: JSON.stringify(data)
-  })
+  try {
+    var response = await fetch(lambdaUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(data)
+    })
 
-  var result = await response.json()
+    var result
+    try {
+      result = await response.json()
+    } catch (jsonError) {
+      throw new Error('Invalid response from server')
+    }
 
-  if (!response.ok) {
-    var error = new Error(result.error || 'Something went wrong')
-    error.statusCode = response.status
-    error.result = result
-    throw error
+    if (!response.ok) {
+      var error = new Error(result.error || 'Something went wrong')
+      error.statusCode = response.status
+      error.result = result
+      throw error
+    }
+
+    return result
+  } catch (err) {
+    // Re-throw if it's already our custom error
+    if (err.statusCode) throw err
+
+    // Network or CORS error
+    throw new Error('Unable to connect to server. Please check your internet connection.')
   }
-
-  return result
 }
 
 // Side effect: Show success message
